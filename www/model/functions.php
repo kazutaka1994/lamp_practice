@@ -1,15 +1,18 @@
 <?php
 
+//var_dumpの関数
 function dd($var){
   var_dump($var);
   exit();
 }
 
+//$urlに飛ぶ関数
 function redirect_to($url){
   header('Location: ' . $url);
   exit;
 }
 
+//getの値を受け取る関数
 function get_get($name){
   if(isset($_GET[$name]) === true){
     return $_GET[$name];
@@ -17,6 +20,7 @@ function get_get($name){
   return '';
 }
 
+//postの値を受け取る関数
 function get_post($name){
   if(isset($_POST[$name]) === true){
     return $_POST[$name];
@@ -24,6 +28,7 @@ function get_post($name){
   return '';
 }
 
+//fileの値を受け取る関数
 function get_file($name){
   if(isset($_FILES[$name]) === true){
     return $_FILES[$name];
@@ -31,6 +36,7 @@ function get_file($name){
   return array();
 }
 
+//sessionの値を受け取る関数
 function get_session($name){
   if(isset($_SESSION[$name]) === true){
     return $_SESSION[$name];
@@ -38,14 +44,17 @@ function get_session($name){
   return '';
 }
 
+//valueの値をsessionで受けている関数
 function set_session($name, $value){
   $_SESSION[$name] = $value;
 }
 
+//不明
 function set_error($error){
   $_SESSION['__errors'][] = $error;
 }
 
+//不明
 function get_errors(){
   $errors = get_session('__errors');
   if($errors === ''){
@@ -55,16 +64,20 @@ function get_errors(){
   return $errors;
 }
 
+//不明
 function has_error(){
   return isset($_SESSION['__errors']) && count($_SESSION['__errors']) !== 0;
 }
 
+//sessionにmessageを入れている
 function set_message($message){
   $_SESSION['__messages'][] = $message;
 }
 
+//messagesにget_sessionを入れている
 function get_messages(){
   $messages = get_session('__messages');
+  
   if($messages === ''){
     return array();
   }
@@ -133,5 +146,9 @@ function is_valid_upload_image($image){
     return false;
   }
   return true;
+}
+
+function h($sanitize){
+  return htmlspecialchars($sanitize, ENT_QUOTES, 'UTF-8');
 }
 
