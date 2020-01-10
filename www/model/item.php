@@ -4,6 +4,7 @@ require_once 'db.php';
 
 // DB利用
 
+//itemsのテーブルから$item_idに対応したデータを受け取る
 function get_item($db, $item_id){
   $sql = "
     SELECT
@@ -18,10 +19,11 @@ function get_item($db, $item_id){
     WHERE
       item_id = {$item_id}
   ";
-
+  //上記$sqlからデータを受け取る
   return fetch_query($db, $sql);
 }
 
+//$is_openにfalseを入れている
 function get_items($db, $is_open = false){
   $sql = '
     SELECT
@@ -34,6 +36,7 @@ function get_items($db, $is_open = false){
     FROM
       items
   ';
+　//どうして$is_openがtureになるのかわからない
   if($is_open === true){
     $sql .= '
       WHERE status = 1
@@ -42,6 +45,7 @@ function get_items($db, $is_open = false){
 
   return fetch_all_query($db, $sql);
 }
+
 
 function get_all_items($db){
   return get_items($db);
@@ -82,6 +86,7 @@ function insert_item($db, $name, $price, $stock, $filename, $status){
         image,
         status
       )
+    //この{}の意味は？
     VALUES('{$name}', {$price}, {$stock}, '{$filename}', {$status_value});
   ";
 

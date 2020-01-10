@@ -14,57 +14,75 @@ function redirect_to($url){
 
 //getの値を受け取る関数
 function get_get($name){
+  //$_GET[$name]に値が入っていたら
   if(isset($_GET[$name]) === true){
+    //$_GET[$name]を返す
     return $_GET[$name];
   };
+  //入っていなかったら空の値を返す
   return '';
 }
 
 //postの値を受け取る関数
 function get_post($name){
+　//$_POST[$name]に値が入っていたら
   if(isset($_POST[$name]) === true){
+　　//$_POST[$name]を返す
     return $_POST[$name];
   };
+　//入ってなかったら空の値を返す
   return '';
 }
 
 //fileの値を受け取る関数
 function get_file($name){
+　//$_FILES[$name]に値が入っていたら
   if(isset($_FILES[$name]) === true){
+　　//$_FILES[$name]を返す
     return $_FILES[$name];
   };
+　//入ってなかったら空の配列を返す
   return array();
 }
 
 //sessionの値を受け取る関数
 function get_session($name){
+　//$_SESSION[$name]に値が入っていたら
   if(isset($_SESSION[$name]) === true){
+    //$_SESSION[$name]の値を返す
     return $_SESSION[$name];
   };
+　//入ってなかったら空の値を返す
   return '';
 }
 
 //valueの値をsessionで受けている関数
 function set_session($name, $value){
+　//$SEEION[$name]に$valueの値を入れる
   $_SESSION[$name] = $value;
 }
 
-//不明
+//$errorの値をsessionで受けている関数
 function set_error($error){
+　//$_SESSION['__errors']に$errorの値を入れる
   $_SESSION['__errors'][] = $error;
 }
 
-//不明
+//
 function get_errors(){
+　//$errorsに$SESSION['__errors']を入れる
   $errors = get_session('__errors');
+　//$errorsが空だったら
   if($errors === ''){
+    //空の配列を返す
     return array();
   }
+　//$SESSION['__errors']に空の配列を入れる
   set_session('__errors',  array());
   return $errors;
 }
 
-//不明
+//$_SESION['__errors']が入っていて、かつ、$_SESSION['__errors']が複数ある
 function has_error(){
   return isset($_SESSION['__errors']) && count($_SESSION['__errors']) !== 0;
 }
@@ -76,18 +94,26 @@ function set_message($message){
 
 //messagesにget_sessionを入れている
 function get_messages(){
+  //$_SESSION['__messages']がセットされていたら$_SESSION['__messages']を返す
+  //そして$messagesに$_SESSION['__messages']を入れる
   $messages = get_session('__messages');
-  
+  //$messagesが空だったら
   if($messages === ''){
+    //空の配列を返す
     return array();
   }
+  //$_SESSION['__messages']に空の配列array()を入れている
   set_session('__messages',  array());
+　//$messagesを返す
   return $messages;
 }
 
 function is_logined(){
+  //$_SESSION['user_id']が入っていたら$_SESSION[user_id']を返し
+  //空文字以外を返す※よくわからない
   return get_session('user_id') !== '';
 }
+
 
 function get_upload_filename($file){
   if(is_valid_upload_image($file) === false){
@@ -116,7 +142,7 @@ function delete_image($filename){
 }
 
 
-
+//文字数の最小値と最大値
 function is_valid_length($string, $minimum_length, $maximum_length = PHP_INT_MAX){
   $length = mb_strlen($string);
   return ($minimum_length <= $length) && ($length <= $maximum_length);
@@ -151,4 +177,3 @@ function is_valid_upload_image($image){
 function h($sanitize){
   return htmlspecialchars($sanitize, ENT_QUOTES, 'UTF-8');
 }
-
