@@ -1,4 +1,4 @@
-<i!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <?php include VIEW_PATH . 'templates/head.php'; ?>
