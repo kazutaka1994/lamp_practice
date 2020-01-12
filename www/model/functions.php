@@ -23,15 +23,23 @@ function get_get($name){
   return '';
 }     
 
+//postの値を受け取る関数
+function get_post($name){
+    if(isset($_POST[$name]) === true){
+      return $_POST[$name];
+    };
+    return '';
+  }
+
 function get_file($name){
-  if(isset($FILES[$name]) === ture){
+  if(isset($FILES[$name]) === true){
     return $_FILES[$name];
   };
   return "";
 }
 
 function get_session($name){
-  if(isset($_SESSION[$name])  === ture){
+  if(isset($_SESSION[$name])  === true){
     return $_SESSION[$name];
   };
   return "";

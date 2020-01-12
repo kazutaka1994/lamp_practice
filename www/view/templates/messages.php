@@ -1,5 +1,5 @@
 <?php
-include_once("/Users/maedakazutaka/MyDocker/lamp_practice/www/model/functions.php");
+include_once("../model/functions.php");
 ?>
 <?php foreach(get_errors() as $error){ ?>
   <p class="alert alert-danger"><span><?php print h($error); ?></span></p>

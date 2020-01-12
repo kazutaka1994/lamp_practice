@@ -1,5 +1,5 @@
 <?php
-include_once("/Users/maedakazutaka/MyDocker/lamp_practice/www/model/functions.php");
+include_once("../model/functions.php");
 ?>
 <header>
   <nav class="navbar navbar-expand-sm navbar-light bg-light">

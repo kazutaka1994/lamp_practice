@@ -36,7 +36,6 @@ function get_items($db, $is_open = false){
     FROM
       items
   ';
-　//どうして$is_openがtureになるのかわからない
   if($is_open === true){
     $sql .= '
       WHERE status = 1
