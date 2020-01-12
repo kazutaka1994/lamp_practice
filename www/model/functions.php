@@ -21,64 +21,36 @@ function get_get($name){
   };
   //入っていなかったら空の値を返す
   return '';
-}
+}     
 
-//postの値を受け取る関数
-function get_post($name){
-　//$_POST[$name]に値が入っていたら
-  if(isset($_POST[$name]) === true){
-　　//$_POST[$name]を返す
-    return $_POST[$name];
-  };
-　//入ってなかったら空の値を返す
-  return '';
-}
-
-//fileの値を受け取る関数
 function get_file($name){
-　//$_FILES[$name]に値が入っていたら
-  if(isset($_FILES[$name]) === true){
-　　//$_FILES[$name]を返す
+  if(isset($FILES[$name]) === ture){
     return $_FILES[$name];
   };
-　//入ってなかったら空の配列を返す
-  return array();
+  return "";
 }
 
-//sessionの値を受け取る関数
 function get_session($name){
-　//$_SESSION[$name]に値が入っていたら
-  if(isset($_SESSION[$name]) === true){
-    //$_SESSION[$name]の値を返す
+  if(isset($_SESSION[$name])  === ture){
     return $_SESSION[$name];
   };
-　//入ってなかったら空の値を返す
-  return '';
+  return "";
 }
 
-//valueの値をsessionで受けている関数
 function set_session($name, $value){
-　//$SEEION[$name]に$valueの値を入れる
   $_SESSION[$name] = $value;
 }
 
-//$errorの値をsessionで受けている関数
 function set_error($error){
-　//$_SESSION['__errors']に$errorの値を入れる
   $_SESSION['__errors'][] = $error;
 }
 
-//
 function get_errors(){
-　//$errorsに$SESSION['__errors']を入れる
   $errors = get_session('__errors');
-　//$errorsが空だったら
-  if($errors === ''){
-    //空の配列を返す
+  if($errors === ""){
     return array();
   }
-　//$SESSION['__errors']に空の配列を入れる
-  set_session('__errors',  array());
+  set_session('__errors',array());
   return $errors;
 }
 
@@ -92,19 +64,12 @@ function set_message($message){
   $_SESSION['__messages'][] = $message;
 }
 
-//messagesにget_sessionを入れている
 function get_messages(){
-  //$_SESSION['__messages']がセットされていたら$_SESSION['__messages']を返す
-  //そして$messagesに$_SESSION['__messages']を入れる
   $messages = get_session('__messages');
-  //$messagesが空だったら
   if($messages === ''){
-    //空の配列を返す
     return array();
   }
-  //$_SESSION['__messages']に空の配列array()を入れている
-  set_session('__messages',  array());
-　//$messagesを返す
+  set_session('__messages', array());
   return $messages;
 }
 

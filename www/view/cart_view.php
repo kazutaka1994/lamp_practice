@@ -1,3 +1,6 @@
+<?php
+include_once("/Users/maedakazutaka/MyDocker/lamp_practice/www/model/functions.php");
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,7 +9,9 @@
   <link rel="stylesheet" href="<?php print h(STYLESHEET_PATH . 'cart.css'); ?>">
 </head>
 <body>
-  <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+  <?php
+     include VIEW_PATH . 'templates/header_logined.php';
+  ?>
   <h1>カート</h1>
   <div class="container">
 
