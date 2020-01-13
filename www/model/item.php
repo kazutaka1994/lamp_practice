@@ -85,7 +85,6 @@ function insert_item($db, $name, $price, $stock, $filename, $status){
         image,
         status
       )
-    //この{}の意味は？
     VALUES('{$name}', {$price}, {$stock}, '{$filename}', {$status_value});
   ";
 
