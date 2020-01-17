@@ -47,3 +47,5 @@ function execute_query($db, $sql, $params = array()){
   }
   return false;
 }
+
+
