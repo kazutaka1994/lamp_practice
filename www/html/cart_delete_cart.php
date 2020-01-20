@@ -13,8 +13,8 @@ if(is_logined() === false){
 
 $token = get_post('token');
 if (is_valid_csrf_token($token) === false){
-set_error('不正なアクセスです');
-redirect_to(CART_URL);
+  set_error('不正なアクセスです');
+  redirect_to(CART_URL);
 }
 
 $db = get_db_connect();
