@@ -14,5 +14,6 @@ $db = get_db_connect();
 $user = get_login_user($db);
 
 $items = get_open_items($db);
-
+$token = get_csrf_token();
+header('X-FRAME-OPTIONS: DENY');
 include_once '../view/index_view.php';
