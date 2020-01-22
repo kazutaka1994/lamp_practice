@@ -55,6 +55,7 @@ function get_user_cart($db, $user_id, $item_id){
 }
 
 function add_cart($db, $item_id, $user_id) {
+  //$cartに入っていなかったらfalseを返してcartにinsertする
   $cart = get_user_cart($db, $item_id, $user_id);
   if($cart === false){
     return insert_cart($db, $user_id, $item_id);

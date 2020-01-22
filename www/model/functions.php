@@ -107,10 +107,9 @@ function get_messages(){
 //$messagesを返す
   return $messages;
 }
-
+//ログインされているか
 function is_logined(){
-  //$_SESSION['user_id']が入っていたら$_SESSION[user_id']を返し
-  //空文字以外を返す※よくわからない
+  //$_SESSION('user_id')が空じゃなければtrueを返す
   return get_session('user_id') !== '';
 }
 
@@ -119,6 +118,7 @@ function get_upload_filename($file){
   if(is_valid_upload_image($file) === false){
     return '';
   }
+  //exif_imagetype
   $mimetype = exif_imagetype($file['tmp_name']);
   $ext = PERMITTED_IMAGE_TYPES[$mimetype];
   return get_random_string() . '.' . $ext;

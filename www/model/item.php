@@ -53,7 +53,7 @@ function get_all_items($db){
 function get_open_items($db){
   return get_items($db, true);
 }
-
+//
 function regist_item($db, $name, $price, $stock, $status, $image){
   $filename = get_upload_filename($image);
   if(validate_item($name, $price, $stock, $filename, $status) === false){

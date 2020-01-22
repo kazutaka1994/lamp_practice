@@ -26,13 +26,17 @@ if(is_admin($user) === false){
 
 $item_id = get_post('item_id');
 $changes_to = get_post('changes_to');
-
+//非公開を公開にする
 if($changes_to === 'open'){
+  //statusを1に変更
   update_item_status($db, $item_id, ITEM_STATUS_OPEN);
   set_message('ステータスを変更しました。');
+//公開を非公開にする
 }else if($changes_to === 'close'){
+  //statusを0に変更
   update_item_status($db, $item_id, ITEM_STATUS_CLOSE);
   set_message('ステータスを変更しました。');
+  //postのvalueがopen,close以外だった場合の処理
 }else {
   set_error('不正なリクエストです。');
 }

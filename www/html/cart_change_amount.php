@@ -22,7 +22,7 @@ $user = get_login_user($db);
 
 $cart_id = get_post('cart_id');
 $amount = get_post('amount');
-
+//$cart_idに対応する$amountを変更
 if(update_cart_amount($db, $cart_id, $amount)){
   set_message('購入数を更新しました。');
 } else {

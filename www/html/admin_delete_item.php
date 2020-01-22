@@ -26,10 +26,11 @@ if(is_admin($user) === false){
 
 $item_id = get_post('item_id');
 
-
+//itemとimageがあればtrueが返り、set_messegeに以下の言葉が格納
 if(destroy_item($db, $item_id) === true){
   set_message('商品を削除しました。');
 } else {
+//itemかimageがなければfalseが返り、set_errorに以下の言葉が格納
   set_error('商品削除に失敗しました。');
 }
 
