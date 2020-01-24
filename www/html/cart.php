@@ -14,7 +14,7 @@ if(is_logined() === false){
 $db = get_db_connect();
 //user_id,name,password,typeの取得
 $user = get_login_user($db);
-//user_idに対応するitem_id,name,price,stock,status,image,cart_id,user_id,amountの取得
+//ログインユーザーのカートデータ一覧を取得
 $carts = get_user_carts($db, $user['user_id']);
 //$cartsに入っている$price*$stockの総和
 $total_price = sum_carts($carts);

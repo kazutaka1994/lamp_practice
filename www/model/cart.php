@@ -102,12 +102,16 @@ function delete_cart($db, $cart_id){
   return execute_query($db, $sql, array(':cart_id' => $cart_id));
 }
 
+//カートの中身を購入
 function purchase_carts($db, $carts){
+  //カートに商品が入っていない
   if(validate_cart_purchase($carts) === false){
     return false;
   }
+  //カートに商品が入っている
   foreach($carts as $cart){
     if(update_item_stock(
+      //在庫が足りない時
         $db, 
         $cart['item_id'], 
         $cart['stock'] - $cart['amount']
@@ -115,7 +119,7 @@ function purchase_carts($db, $carts){
       set_error($cart['name'] . 'の購入に失敗しました。');
     }
   }
-  
+  //ユーザーのカートの削除
   delete_user_carts($db, $carts[0]['user_id']);
 }
 
