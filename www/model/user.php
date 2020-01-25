@@ -44,7 +44,7 @@ function login_as($db, $name, $password){
   set_session('user_id', $user['user_id']);
   return $user;
 }
-
+//sessionに入っているuser_idを取得しデータベースからuser_id,name,passwordを取得する
 function get_login_user($db){
   $login_user_id = get_session('user_id');
 

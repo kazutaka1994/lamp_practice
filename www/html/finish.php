@@ -21,13 +21,13 @@ get_csrf_token();
 
 $db = get_db_connect();
 $user = get_login_user($db);
-
+//カート情報の取得
 $carts = get_user_carts($db, $user['user_id']);
-
+//購入できなかったらfalseを返す
 if(purchase_carts($db, $carts) === false){
   set_error('商品が購入できませんでした。');
   redirect_to(CART_URL);
-} 
+}
 
 $total_price = sum_carts($carts);
 
