@@ -105,6 +105,23 @@ function update_item_status($db, $item_id, $status){
   return execute_query($db, $sql, array(':status' => $status, ':item_id' => $item_id));
 }
 //stockの更新
+
+function update_item_stocks($db, $carts){
+  foreach($carts as $cart){
+    //item_stockの更新
+    if(update_item_stock(
+      //例外が発生した際
+        $db, 
+        $cart['item_id'], 
+        $cart['stock'] - $cart['amount']
+      ) === false){
+      set_error($cart['name'] . 'の購入に失敗しました。');
+      return false;
+    }
+  }
+  return true;
+}
+
 function update_item_stock($db, $item_id, $stock){
   $sql = "
     UPDATE

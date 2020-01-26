@@ -1,6 +1,8 @@
 <?php 
 require_once 'functions.php';
 require_once 'db.php';
+require_once 'detail.php';
+require_once 'order.php';
 
 function get_user_carts($db, $user_id){
   $sql = "
@@ -109,18 +111,29 @@ function purchase_carts($db, $carts){
     return false;
   }
   //カートに商品が入っている
-  foreach($carts as $cart){
-    if(update_item_stock(
-      //在庫が足りない時
-        $db, 
-        $cart['item_id'], 
-        $cart['stock'] - $cart['amount']
-      ) === false){
-      set_error($cart['name'] . 'の購入に失敗しました。');
-    }
+ $db->beginTransaction();
+  //item_stockの更新
+  if(update_item_stocks($db, $carts)=== false){
+      $db->rollback();
+      return false;
+  }
+  //ordersに情報をインサート
+  if(insert_order($db, $carts[0]['user_id']) === false){
+    $db->rollback();
+    return false;
+  }
+  $order_id = $db->lastInsertId();
+  //detailsに情報をインサート
+  if(insert_details($db, $order_id, $carts) === false){
+    $db->rollback();
+    return false;
   }
   //ユーザーのカートの削除
-  delete_user_carts($db, $carts[0]['user_id']);
+  if(delete_user_carts($db, $carts[0]['user_id']) === false){
+    $db->rollback();
+    return false;
+  }
+  $db->commit();
 }
 
 function delete_user_carts($db, $user_id){
