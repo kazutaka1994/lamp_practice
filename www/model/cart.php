@@ -1,8 +1,6 @@
 <?php 
-require_once 'functions.php';
-require_once 'db.php';
-require_once 'detail.php';
-require_once 'order.php';
+require_once MODEL_PATH . 'functions.php';
+require_once MODEL_PATH . 'db.php';
 
 function get_user_carts($db, $user_id){
   $sql = "

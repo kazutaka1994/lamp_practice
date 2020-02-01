@@ -1,5 +1,44 @@
 <?php
 
+function get_order_details($db, $order_id){
+    $sql = "
+    SELECT
+      items.name,
+      details.price,
+      details.amount,
+      details.price * details.amount
+    FROM
+      details
+    JOIN
+      items
+    ON
+      details.item_id = items.item_id
+    WHERE
+      details.order_id = :order_id
+    ";
+    return fetch_all_query($db, $sql , array(':order_id' => $order_id)); 
+}
+
+function get_order($db, $order_id){
+    $sql = "
+      SELECT
+        orders.order_id,
+        orders.created,
+        SUM(details.price * details.amount)
+      FROM
+        orders
+      JOIN
+        details
+      ON
+        orders.order_id = details.order_id
+      WHERE
+        orders.order_id = :order_id
+      GROUP BY 
+        orders.order_id
+    ";
+  return fetch_all_query($db, $sql , array(':order_id' => $order_id));
+}
+
 function insert_details($db, $order_id, $carts){
     foreach($carts as $cart){
         if(insert_detail($db, $order_id, $cart['item_id'], $cart['price'], $cart['amount']) === false){
