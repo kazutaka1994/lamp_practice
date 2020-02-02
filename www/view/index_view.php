@@ -42,7 +42,24 @@
       <?php } ?>
       </div>
     </div>
+    <br>
+    <h1>売上ランキング</h1>
+    <table class = "table table-bordered">
+      <thead class = thead-light>
+        <tr>
+          <th>順位</th>
+          <th>名前</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($ranking as $name){ ?>
+          <tr>
+            <td><?php print h($rank); $rank++; ?></td>
+            <td><?php print h($name['name']); ?></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
   </div>
-  
 </body>
 </html>
