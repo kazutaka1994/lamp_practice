@@ -24,7 +24,8 @@ function get_order($db, $order_id){
       SELECT
         orders.order_id,
         orders.created,
-        SUM(details.price * details.amount)
+        SUM(details.price * details.amount),
+        orders.user_id
       FROM
         orders
       JOIN
@@ -36,7 +37,7 @@ function get_order($db, $order_id){
       GROUP BY 
         orders.order_id
     ";
-  return fetch_all_query($db, $sql , array(':order_id' => $order_id));
+  return fetch_query($db, $sql , array(':order_id' => $order_id));
 }
 
 function insert_details($db, $order_id, $carts){
@@ -64,4 +65,17 @@ function insert_detail($db, $order_id, $item_id, $price, $amount){
     );
 }
 
+function can_watch_order($login_user, $order_user_id){
+  if(is_admin($login_user) === TRUE){
+    return TRUE;
+  }
+  if($login_user['user_id'] === $order_user_id){
+    return TRUE;
+  }
+  set_error('この注文はあなたのものではありません');
+  return FALSE;
+  
+  
+  
+}
 ?>

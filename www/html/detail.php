@@ -19,8 +19,13 @@ $details = get_order_details($db, $order_id);
 //order.phpからGET送信されたorder_idの
 //注文の注文番号、購入日時、合計金額をget_order関数で取得する。
 $order = get_order($db, $order_id);
-//$tokenと$_SESSION('token')のセット
-$token = get_csrf_token();
+if($order === FALSE){
+  set_error('この注文は存在しません');
+  redirect_to(ORDER_URL);
+}
+if(can_watch_order($user, $order['user_id']) === FALSE){
+  redirect_to(ORDER_URL);
+}
 //X-FRAMEを無効化
 header('X-FRAME-OPTIONS: DENY');
 include_once '../view/detail_view.php';

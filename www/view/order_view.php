@@ -32,7 +32,6 @@
               <form action="detail.php" method="get">
                 <input type="submit" value="購入明細一覧" class="btn btn-primary btn-block">
                 <input type="hidden" name="order_id" value="<?php print h($order['order_id']); ?>">
-                <input type="hidden" name="token" value="<?php print h($token); ?>" >
               </form>
             </td>
           </tr>

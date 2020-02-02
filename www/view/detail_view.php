@@ -20,9 +20,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php print h($order[0]['order_id']); ?></td>
-                        <td><?php print h($order[0]['created']); ?></td>
-                        <td><?php print h(number_format($order[0]['SUM(details.price * details.amount)']))?>円</td>
+                        <td><?php print h($order['order_id']); ?></td>
+                        <td><?php print h($order['created']); ?></td>
+                        <td><?php print h(number_format($order['SUM(details.price * details.amount)']))?>円</td>
                     </tr>
                 </tbody>
             </table>

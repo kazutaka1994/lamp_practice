@@ -17,8 +17,6 @@ $user = get_login_user($db);
 //管理者以外の場合
 //ログインしているユーザーの各注文番号 購入日時 該当の注文の合計金額を取得する。
 $orders = get_user_orders($db,$user);
-//$tokenと$_SESSION('token')のセット
-$token = get_csrf_token();
 //X-FRAMEを無効化
 header('X-FRAME-OPTIONS: DENY');
 include_once '../view/order_view.php';
