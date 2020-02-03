@@ -52,9 +52,9 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach($ranking as $name){ ?>
+        <?php foreach($ranking as $key => $name){ ?>
           <tr>
-            <td><?php print h($rank); $rank++; ?></td>
+            <td><?php print h($key + 1);?></td>
             <td><?php print h($name['name']); ?></td>
           </tr>
         <?php } ?>

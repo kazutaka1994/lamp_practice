@@ -54,11 +54,10 @@ function get_open_items($db){
   return get_items($db, true);
 }
 
-function get_item_ranking($db){
+function get_item_ranking($db, $ranking_number){
   $sql = '
     SELECT
-	    items.name,
-      SUM(details.amount)
+	    items.name
     FROM 
 	    items
     JOIN
@@ -68,10 +67,11 @@ function get_item_ranking($db){
     GROUP BY
 	    items.item_id
     ORDER BY
-       SUM(details.amount) DESC
-    LIMIT 3
+      SUM(details.amount) DESC
+    LIMIT 
+      :ranking_number
   ';
-  return fetch_all_query($db, $sql);
+  return fetch_all_query($db, $sql, array(':ranking_number' => $ranking_number));
 }
 
 function regist_item($db, $name, $price, $stock, $status, $image){
