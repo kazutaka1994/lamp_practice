@@ -14,7 +14,7 @@ $db = get_db_connect();
 $user = get_login_user($db);
 // item_id,name,stock,price,image,statusの取得
 $items = get_open_items($db);
-$ranking = get_item_ranking($db, 3);
+$ranking = get_item_ranking($db, RANKING_NUMBER);
 //$tokenと$_SESSION('token')のセット
 $token = get_csrf_token();
 //X-FRAMEを無効化
